@@ -44,5 +44,6 @@ public class TankController : MonoBehaviourPun
     {
         GameObject go = ProjectileManager.RequestProjectile();
         go.SetActive(true);
+        go.transform.rotation = Tank.transform.rotation;
     }
 }

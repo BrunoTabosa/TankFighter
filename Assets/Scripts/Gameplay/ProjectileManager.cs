@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 //Implements a Projectile Pooling
-public class ProjectileManager : MonoBehaviour
+public class ProjectileManager : MonoBehaviourPun
 {
     [SerializeField]
     private GameObject projectilePrefab;
@@ -33,9 +34,10 @@ public class ProjectileManager : MonoBehaviour
         }
 
         ret = projectilesPool[0];
-
+        
         projectilesPool.Remove(ret);
         projectilesInUse.Add(ret);
+        ret.transform.position = this.transform.position;
 
         return ret;
     }
@@ -43,9 +45,8 @@ public class ProjectileManager : MonoBehaviour
     void CreateProjectile()
     {
         GameObject go;
-        go = Instantiate(projectilePrefab, this.transform);
+        go = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity);
         go.SetActive(false);
-
         projectilesPool.Add(go);
     }
 
