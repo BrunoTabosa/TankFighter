@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObserverManager : SingletonManager<ObserverManager>
+public class ObserverManager : SingletonLocal<ObserverManager>
 {
     public Action OnEnemyKilled;
 
