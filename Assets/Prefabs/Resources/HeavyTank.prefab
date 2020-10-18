@@ -54,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5793379329703884867}
   - component: {fileID: 5793379329703884925}
-  - component: {fileID: 5793379329703884866}
   - component: {fileID: 5793379329703884927}
   - component: {fileID: 5793379329703884920}
   - component: {fileID: 5793379329703884921}
@@ -98,19 +97,6 @@ MonoBehaviour:
   Gun: {fileID: 5793379330519500346}
   ProjectileManager: {fileID: 4182397239435372002}
   stats: {fileID: 11400000, guid: 823ca28f80f02ce4581e2449d3fe42cc, type: 2}
---- !u!114 &5793379329703884866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5793379329703884864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a45530296966e5b47a96efab4134d085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tank: {fileID: 5793379329703884925}
 --- !u!50 &5793379329703884927
 Rigidbody2D:
   serializedVersion: 4

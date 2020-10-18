@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataManager : SingletonLocal<DataManager>
 {
+    public PlayerController PlayerControllerPrefab;
     public TankController BalancedTankPrefab;
     public TankController FastTankPrefab;
     public TankController HeavyTankPrefab;

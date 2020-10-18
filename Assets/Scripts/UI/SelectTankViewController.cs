@@ -19,7 +19,7 @@ public class SelectTankViewController : ViewController
 
     void SelectTank(string prefabName)
     {
-        GameStateManager.Instance.SpawnPlayerTank(prefabName);
+        GameStateManager.Instance.SpawnPlayer(prefabName);
         Hide();
     }
 }

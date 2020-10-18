@@ -66,26 +66,31 @@ public class GameStateManager : SingletonPUN<GameStateManager>
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
         PhotonNetwork.CreateRoom(null, new RoomOptions()
         {
-            MaxPlayers = 10
+            MaxPlayers = (byte)DataManager.Instance.RoomConfiguration.MaxPlayers
         });
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-
         Play(); 
     }
     #endregion
 
-    public void SpawnPlayerTank(string prefabName)
+    public void SpawnPlayer(string prefabName)
     {
         Vector2 min = DataManager.Instance.RoomConfiguration.StartingPositionMin;
         Vector2 max = DataManager.Instance.RoomConfiguration.StartingPositionMax;
 
-        PhotonNetwork.Instantiate(prefabName,
+        GameObject go = PhotonNetwork.Instantiate("PlayerController",
             new Vector3(Random.Range(min.x, max.x), Random.Range(min.y, max.y), 0f),
             Quaternion.identity, 0);
+
+        go.GetComponent<PlayerController>().Init(prefabName);
+
+        //PlayerController go = Instantiate(DataManager.Instance.PlayerControllerPrefab);
+
+        //go.Init(prefabName);
     }
 
     public void OnPlayerDeath()

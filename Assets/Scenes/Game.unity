@@ -4050,5 +4050,9 @@ PrefabInstance:
       propertyPath: RoomConfiguration
       value: 
       objectReference: {fileID: 11400000, guid: 10b465c61f74880479a8565288fa0944, type: 2}
+    - target: {fileID: 7500952155717835867, guid: f6508b3c53cdc584d8e3e02066c93afb, type: 3}
+      propertyPath: PlayerControllerPrefab
+      value: 
+      objectReference: {fileID: 4296211769702190079, guid: 3e8e9a7b8c26e85479153f275ac2918b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6508b3c53cdc584d8e3e02066c93afb, type: 3}

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPun
 {
     [SerializeField]
-    private TankController tank;
+    TankController tankController;
 
     Camera camera;
     Vector3 direction;
@@ -15,16 +15,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if(camera == null)
             camera = Camera.main;
-
-        if(tank != null)
-        {
-            tank.OnTankDestroyed += OnTankDestroyed;
-        }
     }
 
-    void Start()
+    public void Init(string tank)
     {
-            
+        //SpawnTank
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
+
+        GameObject go = PhotonNetwork.Instantiate(tank, this.transform.position, Quaternion.identity);
+        tankController = go.GetComponent<TankController>();
+        tankController.OnTankDestroyed += OnTankDestroyed;
     }
 
 
@@ -35,20 +38,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             return;
         }
-        if (tank == null) return;
+        if (tankController == null) return;
 
-        tank.AimAt(camera.ScreenToWorldPoint(Input.mousePosition));
+        tankController.AimAt(camera.ScreenToWorldPoint(Input.mousePosition));
 
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
 
-        tank.MoveTo(direction * Time.deltaTime);
+        tankController.MoveTo(direction * Time.deltaTime);
 
         if(Input.GetButtonDown("Fire"))
         {
             //tank.Shoot();
-            photonView.RPC("Shoot", RpcTarget.AllViaServer);
+            tankController.photonView.RPC("Shoot", RpcTarget.AllViaServer);
         }
+    }
+
+    public void Shoot()
+    {
+        tankController.Shoot();
     }
 
     void OnTankDestroyed()
