@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5793379329703884926}
   - component: {fileID: 2893679449498389300}
   m_Layer: 0
-  m_Name: PlayerTank
+  m_Name: BalancedTank
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,6 @@ MonoBehaviour:
   Tank: {fileID: 5793379330579800800}
   Gun: {fileID: 5793379330519500346}
   ProjectileManager: {fileID: 4182397239435372002}
-  firstSyncComplete: 0
   stats: {fileID: 11400000, guid: da4db42f978a7fc40b5a202fdce73eaf, type: 2}
 --- !u!114 &5793379329703884866
 MonoBehaviour:
@@ -183,6 +182,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
+  - {fileID: 5793379329703884925}
   - {fileID: 5793379329703884920}
   - {fileID: 5793379329703884921}
   - {fileID: 2166792108486987314}
@@ -278,7 +278,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.0045389733, g: 0.3207547, b: 0.03177287, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -362,7 +362,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.012281928, g: 0.8679245, b: 0.088023655, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

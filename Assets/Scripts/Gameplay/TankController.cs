@@ -70,7 +70,10 @@ public class TankController : MonoBehaviourPun, IPunObservable
         if (health == 0)
         {
             //tank destroyed
-            print("destroyed");
+            if(photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }            
         }
 
     }

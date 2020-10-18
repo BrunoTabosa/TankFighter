@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             return;
         }
+        if (tank == null) return;
+
         tank.AimAt(camera.ScreenToWorldPoint(Input.mousePosition));
 
         direction.x = Input.GetAxis("Horizontal");

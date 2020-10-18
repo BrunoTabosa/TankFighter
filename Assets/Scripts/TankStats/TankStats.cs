@@ -10,5 +10,5 @@ public class TankStats : ScriptableObject
     public int ClipSize;
     public int BulletDamage;
     public float BulletSpeed;
-    public int BulletLifeTime;
+    public float BulletLifeTime;
 }

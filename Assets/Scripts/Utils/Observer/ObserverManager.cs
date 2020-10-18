@@ -7,7 +7,7 @@ public class ObserverManager : SingletonLocal<ObserverManager>
 {
     public Action OnEnemyKilled;
 
-    public void Awake()
+    public override void Awake()
     {
         SetInstance(this);
         base.Awake();

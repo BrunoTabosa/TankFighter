@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class DataManager : SingletonLocal<DataManager>
 {
-    public TankStats BasicTank;
-    public TankStats FastTank;
+    public TankController BalancedTankPrefab;
+    public TankController FastTankPrefab;
+    public TankController HeavyTankPrefab;
+
+    public RoomConfiguration RoomConfiguration;
 
     private void Awake()
     {

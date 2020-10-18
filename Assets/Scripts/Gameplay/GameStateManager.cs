@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using Photon.Chat.UtilityScripts;
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -74,9 +75,19 @@ public class GameStateManager : SingletonPUN<GameStateManager>
     public override void OnJoinedRoom()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-        var go = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f),
-            Quaternion.identity, 0);
+
+        UIManager.Instance.ShowSelectTank();
         
+    }
+
+    public void SpawnPlayerTank(string prefabName)
+    {
+        Vector2 min = DataManager.Instance.RoomConfiguration.StartingPositionMin;
+        Vector2 max = DataManager.Instance.RoomConfiguration.StartingPositionMax;
+
+        PhotonNetwork.Instantiate(prefabName,
+            new Vector3(Random.Range(min.x, max.x), Random.Range(min.y, max.y), 0f),
+            Quaternion.identity, 0);
     }
 
     #endregion
