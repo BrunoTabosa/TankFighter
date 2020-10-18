@@ -39,7 +39,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if(Input.GetButtonDown("Fire"))
         {
-            tank.Shoot();
+            //tank.Shoot();
+            photonView.RPC("Shoot", RpcTarget.AllViaServer);
         }
+    }
+
+    void Shoot()
+    {
+        tank.Shoot();
     }
 }

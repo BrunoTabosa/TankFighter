@@ -10,24 +10,24 @@ public class ProjectileManager : MonoBehaviourPun
     [SerializeField]
     private GameObject projectilePrefab;
 
-    private List<GameObject> projectilesPool;
-    private List<GameObject> projectilesInUse;
+    private List<Projectile> projectilesPool;
+    private List<Projectile> projectilesInUse;
 
     
 
     public void Init(int initialCount)
     {
-        projectilesPool = new List<GameObject>();
-        projectilesInUse = new List<GameObject>();
+        projectilesPool = new List<Projectile>();
+        projectilesInUse = new List<Projectile>();
         for (int i = 0; i < initialCount; i++)
         {
             CreateProjectile();
         }
     }
 
-    public GameObject RequestProjectile()
+    public Projectile RequestProjectile()
     {
-        GameObject ret;
+        Projectile ret;
         if(projectilesPool.Count <= 0)
         {
             CreateProjectile();
@@ -45,19 +45,22 @@ public class ProjectileManager : MonoBehaviourPun
     void CreateProjectile()
     {
         GameObject go;
-        go = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity);
+        //go = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity);
+        go = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity);
         go.SetActive(false);
-        projectilesPool.Add(go);
+        
+        Projectile projectile = go.GetComponent<Projectile>();
+        projectile.Setup(this);
+        
+        projectilesPool.Add(projectile);
     }
+
 
     public void OnProjectileDestroy(Projectile projectile)
     {
-        GameObject go = projectile.gameObject;
-
-        go.SetActive(false);
-        go.transform.position = this.transform.position;
-
-        projectilesInUse.Remove(go);
-        projectilesPool.Add(go);
+        projectile.gameObject.SetActive(false);
+        projectile.transform.position = this.transform.position;
+        projectilesInUse.Remove(projectile);
+        projectilesPool.Add(projectile);
     }
 }

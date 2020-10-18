@@ -59,9 +59,10 @@ GameObject:
   - component: {fileID: 5793379329703884920}
   - component: {fileID: 5793379329703884921}
   - component: {fileID: 5793379329703884926}
+  - component: {fileID: 2893679449498389300}
   m_Layer: 0
   m_Name: PlayerTank
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +97,8 @@ MonoBehaviour:
   Tank: {fileID: 5793379330579800800}
   Gun: {fileID: 5793379330519500346}
   ProjectileManager: {fileID: 4182397239435372002}
-  MoveSpeed: 1
+  firstSyncComplete: 0
+  stats: {fileID: 11400000, guid: da4db42f978a7fc40b5a202fdce73eaf, type: 2}
 --- !u!114 &5793379329703884866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,22 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!58 &2893679449498389300
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5793379329703884864}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.09
 --- !u!1 &5793379330519500346
 GameObject:
   m_ObjectHideFlags: 0

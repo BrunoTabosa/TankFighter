@@ -74,8 +74,9 @@ public class GameStateManager : SingletonPUN<GameStateManager>
     public override void OnJoinedRoom()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f),
+        var go = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f),
             Quaternion.identity, 0);
+        
     }
 
     #endregion
