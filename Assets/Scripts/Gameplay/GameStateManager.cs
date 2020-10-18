@@ -8,8 +8,6 @@ using UnityEngine;
 
 public class GameStateManager : SingletonPUN<GameStateManager>
 {
-    [SerializeField]
-    private GameObject playerPrefab;
     public override void Awake()
     {
         SetInstance(this);
@@ -24,7 +22,7 @@ public class GameStateManager : SingletonPUN<GameStateManager>
 
     public void Play()
     {
-        print("play click");
+        UIManager.Instance.ShowSelectTank();
     }
 
     public void Connect()
@@ -76,9 +74,9 @@ public class GameStateManager : SingletonPUN<GameStateManager>
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
 
-        UIManager.Instance.ShowSelectTank();
-        
+        Play(); 
     }
+    #endregion
 
     public void SpawnPlayerTank(string prefabName)
     {
@@ -90,5 +88,8 @@ public class GameStateManager : SingletonPUN<GameStateManager>
             Quaternion.identity, 0);
     }
 
-    #endregion
+    public void OnPlayerDeath()
+    {
+        UIManager.Instance.ShowGameOver();
+    }
 }

@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if(camera == null)
             camera = Camera.main;
+
+        if(tank != null)
+        {
+            tank.OnTankDestroyed += OnTankDestroyed;
+        }
     }
 
     void Start()
@@ -46,8 +51,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
     }
 
-    void Shoot()
+    void OnTankDestroyed()
     {
-        tank.Shoot();
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
+        GameStateManager.Instance.OnPlayerDeath();
     }
 }

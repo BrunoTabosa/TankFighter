@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class UIManager : SingletonLocal<UIManager>
 {
-    public SelectTankViewController SelectTankView;
+    public ViewController SelectTankView;
+    public ViewController GameOverView;
 
     public override void Awake()
     {
@@ -14,6 +15,11 @@ public class UIManager : SingletonLocal<UIManager>
 
     public void ShowSelectTank() 
     {
+        GameOverView.Hide();
         SelectTankView.Show();
+    }
+    public void ShowGameOver()
+    {
+        GameOverView.Show();
     }
 }

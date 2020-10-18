@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System;
 
 public class TankController : MonoBehaviourPun, IPunObservable
 {
@@ -12,6 +13,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
     [SerializeField]
     private ProjectileManager ProjectileManager;
   
+    public Action OnTankDestroyed;
 
     public TankStats stats;
 
@@ -21,7 +23,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        ProjectileManager.Init(2);
+        ProjectileManager.Init(5);
         health = stats.MaximumHealth;
     }
 
@@ -73,6 +75,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
             if(photonView.IsMine)
             {
                 PhotonNetwork.Destroy(this.gameObject);
+                OnTankDestroyed();
             }            
         }
 
