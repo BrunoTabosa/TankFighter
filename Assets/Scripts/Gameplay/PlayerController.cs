@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviourPun
 
     void Awake()
     {
-        if(camera == null)
+        if (camera == null)
             camera = Camera.main;
     }
 
@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviourPun
         GameObject go = PhotonNetwork.Instantiate(tank, this.transform.position, Quaternion.identity);
         tankController = go.GetComponent<TankController>();
         tankController.OnTankDestroyed += OnTankDestroyed;
+
+        PlayerCamera.Instance.SetTarget(tankController.transform);
     }
 
 
@@ -49,14 +51,8 @@ public class PlayerController : MonoBehaviourPun
 
         if(Input.GetButtonDown("Fire"))
         {
-            //tank.Shoot();
             tankController.photonView.RPC("Shoot", RpcTarget.AllViaServer);
         }
-    }
-
-    public void Shoot()
-    {
-        tankController.Shoot();
     }
 
     void OnTankDestroyed()

@@ -74,8 +74,8 @@ public class TankController : MonoBehaviourPun, IPunObservable
             //tank destroyed
             if(photonView.IsMine)
             {
-                PhotonNetwork.Destroy(this.gameObject);
                 OnTankDestroyed();
+                PhotonNetwork.Destroy(this.gameObject);
             }            
         }
 
