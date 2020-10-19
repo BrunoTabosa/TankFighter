@@ -12,8 +12,11 @@ public class TankController : MonoBehaviourPun, IPunObservable
     private GameObject Gun;
     [SerializeField]
     private ProjectileManager ProjectileManager;
+
   
+    //Actions
     public Action OnTankDestroyed;
+    public Action<int, int> OnTankHealthChanged;
 
     public TankStats stats;
 
@@ -68,6 +71,8 @@ public class TankController : MonoBehaviourPun, IPunObservable
     {
         print($"{gameObject.name} received {damage} points of damage");
         health = Mathf.Max(0, health - damage);
+
+        OnTankHealthChanged(health, stats.MaximumHealth);
 
         if (health == 0)
         {
