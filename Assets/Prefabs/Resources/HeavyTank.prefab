@@ -96,7 +96,7 @@ MonoBehaviour:
   Tank: {fileID: 5793379330579800800}
   Gun: {fileID: 5793379330519500346}
   ProjectileManager: {fileID: 4182397239435372002}
-  stats: {fileID: 11400000, guid: 823ca28f80f02ce4581e2449d3fe42cc, type: 2}
+  stats: {fileID: 11400000, guid: 9eba8cb7d3b5f47428ee29b79e83ec47, type: 2}
 --- !u!50 &5793379329703884927
 Rigidbody2D:
   serializedVersion: 4
