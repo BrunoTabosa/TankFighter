@@ -17,6 +17,8 @@ public class TankController : MonoBehaviourPun, IPunObservable
     //Actions
     public Action OnTankDestroyed;
     public Action<int, int> OnTankHealthChanged;
+    public Action OnEnemyDestroyed;
+
 
     public TankStats stats;
 
@@ -67,21 +69,25 @@ public class TankController : MonoBehaviourPun, IPunObservable
 
 
 
-    public void BulletHit(int damage)
+    public void HitAndCheckDeath(int damage, TankController causer)
     {
-        print($"{gameObject.name} received {damage} points of damage");
         health = Mathf.Max(0, health - damage);
 
         OnTankHealthChanged(health, stats.MaximumHealth);
 
         if (health == 0)
         {
+            
             //tank destroyed
             if(photonView.IsMine)
             {
                 OnTankDestroyed();
                 PhotonNetwork.Destroy(this.gameObject);
-            }            
+            }
+            else
+            {
+                causer.OnEnemyDestroyed();
+            }
         }
 
     }
@@ -100,8 +106,6 @@ public class TankController : MonoBehaviourPun, IPunObservable
         {
             //hit by projectile            
         }
-
-
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -115,4 +119,9 @@ public class TankController : MonoBehaviourPun, IPunObservable
             health = (int)stream.ReceiveNext();
         }
     }
+
+    //public void EnemyDestroyed()
+    //{
+
+    //}
 }

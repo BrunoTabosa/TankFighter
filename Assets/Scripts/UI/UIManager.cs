@@ -5,7 +5,10 @@ using UnityEngine;
 public class UIManager : SingletonLocal<UIManager>
 {
     public ViewController SelectTankView;
-    public ViewController GameOverView;
+    public GameOverViewController GameOverViewController;
+    public PlayerHUDViewController PlayerHUDViewController;
+
+    private ViewController currentViewController;
 
     public override void Awake()
     {
@@ -15,11 +18,22 @@ public class UIManager : SingletonLocal<UIManager>
 
     public void ShowSelectTank() 
     {
-        GameOverView.Hide();
+        GameOverViewController.Hide();
         SelectTankView.Show();
     }
     public void ShowGameOver()
     {
-        GameOverView.Show();
+        PlayerHUDViewController.Hide();
+        GameOverViewController.Show();
+    }
+
+    public void ShowPlayerHUD()
+    {
+        PlayerHUDViewController.Show();
+    }
+    public void UpdateScore(int score)
+    {
+        PlayerHUDViewController.SetScore(score);
+        GameOverViewController.SetScore(score);
     }
 }

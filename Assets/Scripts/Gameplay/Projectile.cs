@@ -46,7 +46,8 @@ public class Projectile : MonoBehaviourPun
         {
             //Hit Player
             TankController tankController = collision.GetComponent<TankController>();
-            tankController.BulletHit(damage);
+            tankController.HitAndCheckDeath(damage, owner);
+            
             ProjectileDestroy();
         }
     }

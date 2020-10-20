@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: DevRoom
   m_EditorClassIdentifier: 
   MaxPlayers: 10
-  StartingPositionMin: {x: -3, y: -3}
-  StartingPositionMax: {x: 3, y: 3}
+  StartingPositionMin: {x: -8, y: -8}
+  StartingPositionMax: {x: 8, y: 8}
+  ScoreForEnemyDestroyed: 15
+  ScoreForObjectDestroyed: 5

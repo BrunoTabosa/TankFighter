@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviourPun
     Camera camera;
     Vector3 direction;
 
+    int score;
+
     void Awake()
     {
         if (camera == null)
@@ -28,8 +30,12 @@ public class PlayerController : MonoBehaviourPun
         GameObject go = PhotonNetwork.Instantiate(tank, this.transform.position, Quaternion.identity);
         tankController = go.GetComponent<TankController>();
         tankController.OnTankDestroyed += OnTankDestroyed;
+        tankController.OnEnemyDestroyed += OnEnemyDestroyed;
 
         PlayerCamera.Instance.SetTarget(tankController.transform);
+
+        score = 0;
+        UpdateScore();
     }
 
 
@@ -62,5 +68,16 @@ public class PlayerController : MonoBehaviourPun
             return;
         }
         GameStateManager.Instance.OnPlayerDeath();
+    }
+
+    void OnEnemyDestroyed()
+    {
+        score += DataManager.Instance.RoomConfiguration.ScoreForEnemyDestroyed;
+        UpdateScore();
+    }
+
+    void UpdateScore()
+    {
+        UIManager.Instance.UpdateScore(score);
     }
 }
