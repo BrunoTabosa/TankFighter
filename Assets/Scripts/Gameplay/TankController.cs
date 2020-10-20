@@ -65,7 +65,9 @@ public class TankController : MonoBehaviourPun, IPunObservable
         projectile.transform.rotation = Tank.transform.rotation;
         projectile.Shoot(this);
         CurrentAmmo--;
+
         OnShotFired();
+
     }
 
 
@@ -75,8 +77,6 @@ public class TankController : MonoBehaviourPun, IPunObservable
         stats = newStats;
         health = stats.MaximumHealth;
     }
-
-
 
     public void HitAndCheckDeath(int damage, TankController causer)
     {
@@ -130,6 +130,9 @@ public class TankController : MonoBehaviourPun, IPunObservable
 
     void OnDestructableDestroy_Handler(Destructable destructable)
     {
-        CurrentAmmo += destructable.AmmoReward;
+        if (photonView.IsMine)
+        {
+            //CurrentAmmo += destructable.AmmoReward;
+        }
     }
 }

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviourPun
 
         score = 0;
         UpdateScore();
-        UpdateAmmo();
+        SetAmmo(tankController.stats.MaximumAmmo);
     }
 
 
@@ -93,7 +93,10 @@ public class PlayerController : MonoBehaviourPun
 
     void OnShotFired()
     {
-        UpdateAmmo();
+        if (photonView.IsMine)
+        {
+            UpdateAmmo();
+        }
     }
 
     void UpdateScore()
@@ -103,6 +106,10 @@ public class PlayerController : MonoBehaviourPun
 
     void UpdateAmmo()
     {
-        UIManager.Instance.UpdateAmmo(tankController.CurrentAmmo, tankController.stats.MaximumAmmo);
+        UIManager.Instance.UpdateAmmo(tankController.CurrentAmmo);
+    }
+    void SetAmmo(int value)
+    {
+        UIManager.Instance.UpdateAmmo(value);
     }
 }

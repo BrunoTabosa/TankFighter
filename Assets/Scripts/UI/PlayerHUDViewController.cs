@@ -22,7 +22,7 @@ public class PlayerHUDViewController : ViewController
         TextScore.text = newScore.ToString();
     }
 
-    public void SetAmmo(int current, int maximum)
+    public void SetAmmo(int current)
     {
         TextAmmo.text = $"{current}";
     }
