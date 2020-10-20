@@ -24,6 +24,6 @@ public class PlayerHUDViewController : ViewController
 
     public void SetAmmo(int current, int maximum)
     {
-        TextAmmo.text = $"{current}/{maximum}";
+        TextAmmo.text = $"{current}";
     }
 }

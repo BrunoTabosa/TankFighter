@@ -53,7 +53,8 @@ public class Projectile : MonoBehaviourPun
         else if (collision.tag == Tags.Desctructable)
         {
             Destructable destructable = collision.gameObject.GetComponent<Destructable>();
-            owner.OnDestructableDestroy();
+            owner.CurrentAmmo += destructable.AmmoReward;
+            owner.OnDestructableDestroy(destructable);
             destructable.Destroy();
 
             ProjectileDestroy();

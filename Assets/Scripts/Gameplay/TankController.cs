@@ -13,24 +13,27 @@ public class TankController : MonoBehaviourPun, IPunObservable
     [SerializeField]
     private ProjectileManager ProjectileManager;
 
-  
+
     //Actions
     public Action OnTankDestroyed;
     public Action<int, int> OnTankHealthChanged;
     public Action OnEnemyDestroyed;
-    public Action OnDestructableDestroy;
-
+    public Action<Destructable> OnDestructableDestroy;
+    public Action OnShotFired;
 
     public TankStats stats;
 
-    private int health;
-    public int Health { get; set; }
+    int health;
+
+    public int CurrentAmmo;
 
     // Start is called before the first frame update
     void Start()
     {
         ProjectileManager.Init(5);
         health = stats.MaximumHealth;
+        CurrentAmmo = stats.MaximumAmmo;
+        OnDestructableDestroy += OnDestructableDestroy_Handler;
     }
 
     // Update is called once per frame
@@ -55,10 +58,14 @@ public class TankController : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void Shoot()
     {
+        if (CurrentAmmo <= 0) return;
+
         Projectile projectile = ProjectileManager.RequestProjectile();
         projectile.gameObject.SetActive(true);
         projectile.transform.rotation = Tank.transform.rotation;
         projectile.Shoot(this);
+        CurrentAmmo--;
+        OnShotFired();
     }
 
 
@@ -79,9 +86,8 @@ public class TankController : MonoBehaviourPun, IPunObservable
 
         if (health == 0)
         {
-            
             //tank destroyed
-            if(photonView.IsMine)
+            if (photonView.IsMine)
             {
                 OnTankDestroyed();
                 PhotonNetwork.Destroy(this.gameObject);
@@ -112,7 +118,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
         {
             stream.SendNext(health);
         }
@@ -122,8 +128,8 @@ public class TankController : MonoBehaviourPun, IPunObservable
         }
     }
 
-    //public void EnemyDestroyed()
-    //{
-
-    //}
+    void OnDestructableDestroy_Handler(Destructable destructable)
+    {
+        CurrentAmmo += destructable.AmmoReward;
+    }
 }

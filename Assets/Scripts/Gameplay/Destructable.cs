@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviourPun
 {
+    public int AmmoReward;
+    public int ScoreReward;
     public void Destroy()
     {
         gameObject.SetActive(false); //Prevent multiple hits while RPC is running

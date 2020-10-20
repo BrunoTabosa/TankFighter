@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 1.8
   MaximumHealth: 90
-  ClipSize: 15
+  MaximumAmmo: 25
   BulletDamage: 8
   BulletSpeed: 2.3
   BulletLifeTime: 2

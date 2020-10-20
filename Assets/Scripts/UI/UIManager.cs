@@ -36,4 +36,9 @@ public class UIManager : SingletonLocal<UIManager>
         PlayerHUDViewController.SetScore(score);
         GameOverViewController.SetScore(score);
     }
+
+    public void UpdateAmmo(int currentAmmo, int maximumAmmo)
+    {
+        PlayerHUDViewController.SetAmmo(currentAmmo, maximumAmmo);
+    }
 }

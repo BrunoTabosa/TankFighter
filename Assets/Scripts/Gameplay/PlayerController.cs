@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviourPun
         tankController.OnTankDestroyed += OnTankDestroyed;
         tankController.OnEnemyDestroyed += OnEnemyDestroyed;
         tankController.OnDestructableDestroy += OnDestructableDestroy;
+        tankController.OnShotFired += OnShotFired;
 
         PlayerCamera.Instance.SetTarget(tankController.transform);
 
         score = 0;
         UpdateScore();
+        UpdateAmmo();
     }
 
 
@@ -77,14 +79,30 @@ public class PlayerController : MonoBehaviourPun
         UpdateScore();
     }
 
-    void OnDestructableDestroy()
+    void OnDestructableDestroy(Destructable destructable)
     {
-        score += DataManager.Instance.RoomConfiguration.ScoreForDestructableDestroyed;
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
+        score += destructable.ScoreReward;
         UpdateScore();
+
+        UpdateAmmo();
+    }
+
+    void OnShotFired()
+    {
+        UpdateAmmo();
     }
 
     void UpdateScore()
     {
         UIManager.Instance.UpdateScore(score);
+    }
+
+    void UpdateAmmo()
+    {
+        UIManager.Instance.UpdateAmmo(tankController.CurrentAmmo, tankController.stats.MaximumAmmo);
     }
 }

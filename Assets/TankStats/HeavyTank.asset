@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e9f6ad3c6ab7d4db3f5fdd4e590e3f, type: 3}
   m_Name: HeavyTank
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.85
-  MaximumHealth: 120
-  ClipSize: 18
+  MovementSpeed: 1
+  MaximumHealth: 135
+  MaximumAmmo: 18
   BulletDamage: 15
   BulletSpeed: 1.6
   BulletLifeTime: 2.4
