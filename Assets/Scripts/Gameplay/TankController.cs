@@ -18,6 +18,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
     public Action OnTankDestroyed;
     public Action<int, int> OnTankHealthChanged;
     public Action OnEnemyDestroyed;
+    public Action OnDestructableDestroy;
 
 
     public TankStats stats;
@@ -59,6 +60,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
         projectile.transform.rotation = Tank.transform.rotation;
         projectile.Shoot(this);
     }
+
 
     [PunRPC]
     public void SetStats(TankStats newStats)

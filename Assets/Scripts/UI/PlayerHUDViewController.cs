@@ -8,7 +8,9 @@ public class PlayerHUDViewController : ViewController
     [SerializeField]
     TMP_Text TextScore;
 
-    int score;
+    [SerializeField]
+    TMP_Text TextAmmo;
+
 
     private void Start()
     {
@@ -17,13 +19,11 @@ public class PlayerHUDViewController : ViewController
 
     public void SetScore(int newScore)
     {
-        score = newScore;
-        TextScore.text = score.ToString();
+        TextScore.text = newScore.ToString();
     }
 
-    public void AddScore(int points)
+    public void SetAmmo(int current, int maximum)
     {
-        score += points;
-        TextScore.text = score.ToString();
+        TextAmmo.text = $"{current}/{maximum}";
     }
 }

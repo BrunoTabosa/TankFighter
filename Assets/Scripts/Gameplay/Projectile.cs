@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviourPun
     int damage;
     float timeToLive;
     float bulletSpeed;
-    
+
     TankController owner;
     ProjectileManager pm;
     bool isActive = false;
@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviourPun
         transform.Translate(Vector3.right * Time.deltaTime * bulletSpeed);
 
         timeToLive -= Time.deltaTime;
-        if(timeToLive <= 0)
+        if (timeToLive <= 0)
         {
             ProjectileDestroy();
         }
@@ -42,17 +42,25 @@ public class Projectile : MonoBehaviourPun
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == Tags.Player && collision.gameObject != owner.gameObject)
+        if (collision.tag == Tags.Player && collision.gameObject != owner.gameObject)
         {
             //Hit Player
             TankController tankController = collision.GetComponent<TankController>();
             tankController.HitAndCheckDeath(damage, owner);
-            
+
+            ProjectileDestroy();
+        }
+        else if (collision.tag == Tags.Desctructable)
+        {
+            Destructable destructable = collision.gameObject.GetComponent<Destructable>();
+            owner.OnDestructableDestroy();
+            destructable.Destroy();
+
             ProjectileDestroy();
         }
     }
 
-    
+
     public void ProjectileDestroy()
     {
         isActive = false;

@@ -16,4 +16,4 @@ MonoBehaviour:
   StartingPositionMin: {x: -8, y: -8}
   StartingPositionMax: {x: 8, y: 8}
   ScoreForEnemyDestroyed: 15
-  ScoreForObjectDestroyed: 5
+  ScoreForDestructableDestroyed: 5

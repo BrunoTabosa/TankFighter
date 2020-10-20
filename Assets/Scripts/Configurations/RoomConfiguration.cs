@@ -10,5 +10,5 @@ public class RoomConfiguration : ScriptableObject
     public Vector2 StartingPositionMax;
 
     public int ScoreForEnemyDestroyed;
-    public int ScoreForObjectDestroyed;
+    public int ScoreForDestructableDestroyed;
 }

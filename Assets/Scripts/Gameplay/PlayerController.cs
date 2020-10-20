@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviourPun
         tankController = go.GetComponent<TankController>();
         tankController.OnTankDestroyed += OnTankDestroyed;
         tankController.OnEnemyDestroyed += OnEnemyDestroyed;
+        tankController.OnDestructableDestroy += OnDestructableDestroy;
 
         PlayerCamera.Instance.SetTarget(tankController.transform);
 
@@ -73,6 +74,12 @@ public class PlayerController : MonoBehaviourPun
     void OnEnemyDestroyed()
     {
         score += DataManager.Instance.RoomConfiguration.ScoreForEnemyDestroyed;
+        UpdateScore();
+    }
+
+    void OnDestructableDestroy()
+    {
+        score += DataManager.Instance.RoomConfiguration.ScoreForDestructableDestroyed;
         UpdateScore();
     }
 
