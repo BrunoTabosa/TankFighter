@@ -52,7 +52,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
     }
     public void MoveTo(Vector3 direction)
     {
-        transform.Translate(direction * stats.MovementSpeed);
+        transform.Translate(direction * stats.MovementSpeed * Time.deltaTime);
     }
 
     [PunRPC]

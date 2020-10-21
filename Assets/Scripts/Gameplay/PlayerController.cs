@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviourPun
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
 
-        tankController.MoveTo(direction * Time.deltaTime);
+        tankController.MoveTo(direction);
 
         if(Input.GetButtonDown("Fire"))
         {

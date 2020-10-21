@@ -26,11 +26,14 @@ public class GameStateManager : SingletonPUN<GameStateManager>
         Vector2 min = DataManager.Instance.RoomConfiguration.StartingPositionMin;
         Vector2 max = DataManager.Instance.RoomConfiguration.StartingPositionMax;
 
-        for (int i = 0; i < 25; i++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate("DestructableBox",
-                new Vector3(Random.Range(min.x, max.x), Random.Range(min.y, max.y), 0f),
-                Quaternion.identity);
+            for (int i = 0; i < 2; i++)
+            {
+                PhotonNetwork.Instantiate("DestructableBox",
+                    new Vector3(Random.Range(min.x, max.x), Random.Range(min.y, max.y), 0f),
+                    Quaternion.identity);
+            }
         }
     }
 
