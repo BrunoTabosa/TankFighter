@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviourPun
 
         tankController.MoveTo(direction);
 
-        if(Input.GetButtonDown("Fire"))
+        if(Input.GetButtonDown("Fire") && tankController.CanShoot())
         {
             tankController.photonView.RPC("Shoot", RpcTarget.AllViaServer);
         }

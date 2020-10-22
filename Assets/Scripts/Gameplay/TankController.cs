@@ -68,9 +68,6 @@ public class TankController : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void Shoot()
     {
-        //if (!photonView.IsMine) return;
-        if (CurrentAmmo <= 0 || !CanShoot()) return;
-
         Projectile projectile = ProjectileManager.RequestProjectile();
         projectile.gameObject.SetActive(true);
         projectile.transform.rotation = Tank.transform.rotation;
@@ -101,11 +98,12 @@ public class TankController : MonoBehaviourPun, IPunObservable
             if (photonView.IsMine)
             {
                 OnTankDestroyed?.Invoke();
+                causer?.OnEnemyDestroyed?.Invoke();
                 PhotonNetwork.Destroy(this.gameObject);
             }
             else
             {
-                causer?.OnEnemyDestroyed();
+                //causer?.OnEnemyDestroyed();
             }
         }
 
@@ -149,6 +147,11 @@ public class TankController : MonoBehaviourPun, IPunObservable
 
     public bool CanShoot()
     {
-        return curCooldown == 0;
+        if (photonView.IsMine)
+        {
+            return curCooldown == 0 && CurrentAmmo > 0;
+        }
+        else 
+            return true;
     }
 }

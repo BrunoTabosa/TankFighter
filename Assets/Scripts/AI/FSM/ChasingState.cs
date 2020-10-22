@@ -22,7 +22,10 @@ public class ChasingState : State
         AIController.TankController.AimAt(AIController.Enemy.transform.position);
         if (Vector3.Distance(AIController.Enemy.transform.position, AIController.TankController.transform.position) <= 2)
         {
-            AIController.TankController.photonView.RPC("Shoot", Photon.Pun.RpcTarget.All);
+            if (AIController.TankController.CanShoot())
+            {
+                AIController.TankController.photonView.RPC("Shoot", Photon.Pun.RpcTarget.All);
+            }
             return;
         }
         AIController.TankController.MoveTo(FindMoveDirection());

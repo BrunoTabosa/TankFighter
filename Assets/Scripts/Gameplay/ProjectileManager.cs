@@ -56,6 +56,7 @@ public class ProjectileManager : MonoBehaviourPun
 
     public void OnProjectileDestroy(Projectile projectile)
     {
+        if (projectile == null) return;
         projectile.gameObject.SetActive(false);
         projectile.transform.position = this.transform.position;
         projectilesInUse.Remove(projectile);

@@ -14,16 +14,20 @@ public class AIController : MonoBehaviourPun
     public void Awake()
     {
         if (!PhotonNetwork.IsMasterClient) return;
+
         string prefab = DataManager.Instance.GetRandomTank();
         GameObject tankGO = PhotonNetwork.Instantiate(prefab, transform.position, Quaternion.identity);
-        Init(tankGO.GetComponent<TankController>());
 
+        Init(tankGO.GetComponent<TankController>());
+        
     }
     public void Init(TankController tankController)
     {
         if (!PhotonNetwork.IsMasterClient) return;
+        
         TankController = tankController;
         transform.parent = TankController.transform;
+
         StateMachine = new StateMachine(this);
     }
 
