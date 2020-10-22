@@ -11,4 +11,5 @@ public class TankStats : ScriptableObject
     public int BulletDamage;
     public float BulletSpeed;
     public float BulletLifeTime;
+    public float ShotCooldown;
 }

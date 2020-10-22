@@ -14,11 +14,17 @@ public class ChasingState : State
 
     public override void Update()
     {
+        if(AIController.Enemy == null)
+        {
+            AIController.StateMachine.SetState(new MovingState(AIController));
+            return;
+        }
+        AIController.TankController.AimAt(AIController.Enemy.transform.position);
         if (Vector3.Distance(AIController.Enemy.transform.position, AIController.TankController.transform.position) <= 2)
         {
             AIController.TankController.photonView.RPC("Shoot", Photon.Pun.RpcTarget.All);
+            return;
         }
-        AIController.TankController.AimAt(AIController.Enemy.transform.position);
         AIController.TankController.MoveTo(FindMoveDirection());
     }
 

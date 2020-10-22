@@ -15,6 +15,7 @@ MonoBehaviour:
   MovementSpeed: 1
   MaximumHealth: 135
   MaximumAmmo: 18
-  BulletDamage: 15
+  BulletDamage: 20
   BulletSpeed: 1.6
   BulletLifeTime: 2.4
+  ShotCooldown: 1.3

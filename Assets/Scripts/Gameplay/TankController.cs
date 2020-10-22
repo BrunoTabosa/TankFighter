@@ -22,10 +22,11 @@ public class TankController : MonoBehaviourPun, IPunObservable
     public Action OnShotFired;
 
     public TankStats stats;
+    public int CurrentAmmo;
 
     int health;
+    float curCooldown;
 
-    public int CurrentAmmo;
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +35,21 @@ public class TankController : MonoBehaviourPun, IPunObservable
         health = stats.MaximumHealth;
         CurrentAmmo = stats.MaximumAmmo;
         OnDestructableDestroy += OnDestructableDestroy_Handler;
+        curCooldown = stats.ShotCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (photonView.IsMine)
+        {
+            if (curCooldown <= 0)
+            {
+                curCooldown = 0;
+                return;
+            }
+            curCooldown -= Time.deltaTime;
+        }
     }
 
     public void AimAt(Vector3 target)
@@ -58,15 +68,16 @@ public class TankController : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void Shoot()
     {
-        if (CurrentAmmo <= 0) return;
+        //if (!photonView.IsMine) return;
+        if (CurrentAmmo <= 0 || !CanShoot()) return;
 
         Projectile projectile = ProjectileManager.RequestProjectile();
         projectile.gameObject.SetActive(true);
         projectile.transform.rotation = Tank.transform.rotation;
         projectile.Shoot(this);
         CurrentAmmo--;
-
-        OnShotFired();
+        curCooldown = stats.ShotCooldown;
+        OnShotFired?.Invoke();
 
     }
 
@@ -89,7 +100,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
             //tank destroyed
             if (photonView.IsMine)
             {
-                OnTankDestroyed();
+                OnTankDestroyed?.Invoke();
                 PhotonNetwork.Destroy(this.gameObject);
             }
             else
@@ -134,5 +145,10 @@ public class TankController : MonoBehaviourPun, IPunObservable
         {
             //CurrentAmmo += destructable.AmmoReward;
         }
+    }
+
+    public bool CanShoot()
+    {
+        return curCooldown == 0;
     }
 }
