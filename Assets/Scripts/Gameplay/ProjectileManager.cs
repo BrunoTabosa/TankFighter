@@ -13,8 +13,6 @@ public class ProjectileManager : MonoBehaviourPun
     private List<Projectile> projectilesPool;
     private List<Projectile> projectilesInUse;
 
-    
-
     public void Init(int initialCount)
     {
         projectilesPool = new List<Projectile>();

@@ -11,10 +11,20 @@ public class AIController : MonoBehaviourPun
     public TankController Enemy;
     public Vector3 moveTarget;
 
-    public void Start()
+    public void Awake()
     {
-        StateMachine = new StateMachine(this);
+        if (!PhotonNetwork.IsMasterClient) return;
+        string prefab = DataManager.Instance.GetRandomTank();
+        GameObject tankGO = PhotonNetwork.Instantiate(prefab, transform.position, Quaternion.identity);
+        Init(tankGO.GetComponent<TankController>());
+
+    }
+    public void Init(TankController tankController)
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        TankController = tankController;
         transform.parent = TankController.transform;
+        StateMachine = new StateMachine(this);
     }
 
     public void Update()
@@ -27,11 +37,11 @@ public class AIController : MonoBehaviourPun
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!PhotonNetwork.IsMasterClient) return;
-        if(collision.tag == Tags.Player)
+        if (collision.tag == Tags.Player)
         {
             //EnemyInSensorRange
-            Enemy = collision.GetComponent<TankController>();
-            StateMachine.currentState.TargetInRange();
+            //Current State handles what to do
+            StateMachine.currentState.TargetInRange(collision.GetComponent<TankController>());
         }
     }
 }

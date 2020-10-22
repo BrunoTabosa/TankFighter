@@ -105,7 +105,7 @@ public class TankController : MonoBehaviourPun, IPunObservable
             }
             else
             {
-                causer.OnEnemyDestroyed();
+                causer?.OnEnemyDestroyed();
             }
         }
 

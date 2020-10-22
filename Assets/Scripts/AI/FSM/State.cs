@@ -20,5 +20,5 @@
 
     }
 
-    public virtual void TargetInRange() { }
+    public virtual void TargetInRange(TankController enemy) { }
 }

@@ -98,6 +98,7 @@ MonoBehaviour:
   Gun: {fileID: 5793379330519500346}
   ProjectileManager: {fileID: 4182397239435372002}
   stats: {fileID: 11400000, guid: da4db42f978a7fc40b5a202fdce73eaf, type: 2}
+  CurrentAmmo: 0
 --- !u!50 &5793379329703884927
 Rigidbody2D:
   serializedVersion: 4

@@ -32,9 +32,9 @@ public class ChasingState : State
     {
     }
 
-    public override void TargetInRange()
+    public override void TargetInRange(TankController tankController)
     {
-       
+        return;
     }
 
     private Vector3 FindMoveTarget()

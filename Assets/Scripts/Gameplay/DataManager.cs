@@ -16,4 +16,19 @@ public class DataManager : SingletonLocal<DataManager>
         SetInstance(this);
         base.Awake();
     }
+
+    public string GetRandomTank()
+    {
+        switch(Random.Range(0, 3))
+        {
+            case 0:
+                return BalancedTankPrefab.name;
+            case 1:
+                return FastTankPrefab.name;
+            case 2:
+                return HeavyTankPrefab.name;
+            default:
+                return BalancedTankPrefab.name;
+        }
+    }
 }

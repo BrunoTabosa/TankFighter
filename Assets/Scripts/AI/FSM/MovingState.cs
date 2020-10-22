@@ -27,8 +27,9 @@ public class MovingState : State
     {
     }
 
-    public override void TargetInRange()
+    public override void TargetInRange(TankController enemy)
     {
+        AIController.Enemy = enemy;
         AIController.StateMachine.SetState(new ChasingState(AIController));
     }
 

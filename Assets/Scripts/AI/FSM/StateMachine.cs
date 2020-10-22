@@ -13,7 +13,6 @@ public class StateMachine
 
     public void SetState(State newState)
     {
-        Debug.Log($"NewState: {newState.GetType()}");
         currentState?.Exit();
 
         currentState = newState;

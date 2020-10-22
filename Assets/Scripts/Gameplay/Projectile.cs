@@ -56,11 +56,12 @@ public class Projectile : MonoBehaviourPun
             if (owner.photonView.IsMine)
             {
                 owner.CurrentAmmo += destructable.AmmoReward;
-            }
-            owner.OnDestructableDestroy(destructable);
-            destructable.Destroy();
 
-            ProjectileDestroy();
+                owner.OnDestructableDestroy(destructable);
+                destructable.Destroy();
+
+                ProjectileDestroy();
+            }
         }
     }
 
@@ -68,7 +69,7 @@ public class Projectile : MonoBehaviourPun
     public void ProjectileDestroy()
     {
         isActive = false;
-        pm.OnProjectileDestroy(this);
+        pm?.OnProjectileDestroy(this);
     }
 
 }
