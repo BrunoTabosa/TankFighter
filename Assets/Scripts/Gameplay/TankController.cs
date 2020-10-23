@@ -101,10 +101,6 @@ public class TankController : MonoBehaviourPun, IPunObservable
                 causer?.OnEnemyDestroyed?.Invoke();
                 PhotonNetwork.Destroy(this.gameObject);
             }
-            else
-            {
-                //causer?.OnEnemyDestroyed();
-            }
         }
 
     }

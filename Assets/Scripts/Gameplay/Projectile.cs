@@ -44,7 +44,6 @@ public class Projectile : MonoBehaviourPun
     {
         if (collision.tag == Tags.Player && collision.gameObject != owner.gameObject)
         {
-            print("Projectile Hit Enemy");
             //Hit Player
             TankController tankController = collision.GetComponent<TankController>();
             tankController.HitAndCheckDeath(damage, owner);
